@@ -1,0 +1,42 @@
+"Atomic classes of objects"
+
+1.  Character
+2.  Numeric (real numbers)
+3.  Integer
+4.  Complex
+5.  Logical (true / false)
+
+Most basic object is a vector
+
+vector can only contain objects of the same classes
+->  Except lists
+
+Empty vectors can be created with the vector(class, length) function
+
+Numbers are treated as numeric
+->  If you want inteers you have to specify the L Suffix (example:  1L)
+
+Inf = Infinity
+NaN - Not Defined
+
+Attribues 
+	R objects can have:
+	- Names, dimnames
+	- dimensions
+	- Class
+	- Length
+	- Other user defined attributes/metadata
+* Accessed with the attributes() function
+
+c() funciton - Concatinate 
+
+Data type conversions
+-Goes to least common denominator
+y <- c(1.7, "a")  #character
+y <- c(T, 2)  	  #numeric
+y <-c("a", TRUE)  #character
+
+Explicit Conversion
+x<-0:6
+
+class(x)
