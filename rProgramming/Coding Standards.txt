@@ -1,0 +1,7 @@
+Coding Standards
+
+1.  Always use text format that can be read by others
+2.  Indent your code -at least 4 spaces (8 is recommended)
+3.  Limit the width of your code (80 columns)
+4.  Limit the length of individual functions
+	->  Function should be limited to one logical activity

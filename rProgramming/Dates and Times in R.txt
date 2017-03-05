@@ -1,0 +1,68 @@
+
+Dates and Times in R
+
+*Dates are represented by the Date class
+*Times are represented by POSIXct or the POSIXlt class
+	Dates are stored as the number of days since 1/1/1970
+	Times are stored as the number of seconds since 1/1/1970
+
+> x <-as.Date("2000-01-01")
+> 
+> x
+[1] "2000-01-01"
+> 
+> unclass(x)
+[1] 10957
+
+POSIXct - very large int; useful when storing times in something like a data frame
+POSIXlt - is a list that has useful attribues (DOW, DOM, MM, etc)
+Funcitons that work on dates and times:
+weekdays:
+months:
+quarters:
+> weekdays(x)
+[1] "Saturday"
+
+Can coerce a character string to each of these types
+
+> s <-Sys.time()
+> s
+[1] "2017-03-05 09:41:54 EST"
+> unclass(s)
+[1] 1488724915
+> p <- as.POSIXlt(s)
+> names(unclass(p))
+ [1] "sec"    "min"    "hour"   "mday"   "mon"    "year"   "wday"  
+ [8] "yday"   "isdst"  "zone"   "gmtoff"
+> p$Sec
+NULL
+> p <- as.POSIXct((s))
+> s
+[1] "2017-03-05 09:41:54 EST"
+> p$sec
+Error in p$sec : $ operator is invalid for atomic vectors
+> s <-Sys.time()
+> s
+[1] "2017-03-05 09:42:27 EST"
+> unclass(s)
+[1] 1488724947
+> p <- as.POSIXlt(s)
+> names(unclass(p))
+ [1] "sec"    "min"    "hour"   "mday"   "mon"    "year"   "wday"  
+ [8] "yday"   "isdst"  "zone"   "gmtoff"
+> p$sec
+[1] 27.09243
+> p <- as.POSIXct((s))
+> s
+[1] "2017-03-05 09:42:27 EST"
+
+strptime
+
+> datestring <-c("January 10, 2014 10:40", "December 7, 1942 04:00")
+> datestring
+[1] "January 10, 2014 10:40" "December 7, 1942 04:00"
+> x <- strptime(datestring, "%B %d, %Y %H:%M")
+> x
+[1] "2014-01-10 10:40:00 EST" "1942-12-07 04:00:00 EWT"
+> 
+> ?strptime
