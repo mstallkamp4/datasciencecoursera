@@ -1,0 +1,157 @@
+Functions
+objects of a class of function
+first class objects
+
+Named arguments
+formal arguments are passed to the function
+may not be requied to pass to the function if they have default values defined
+named arguments can be passed in any order, however, 
+sd(hw)
+sd(x = hw)
+sd(x = mydata, na.rm=FALSE)
+sd(na.rm=false, mydata)
+sd(na.rm=FALSE, x = mydata)
+
+use args(functionname) to view formal arguments
+> args(lm)
+function (formula, data, subset, weights, na.action, method = "qr", 
+    model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
+    contrasts = NULL, offset, ...) 
+
+If you use a named argument while passing to the function, you may use an unnamed argument that will be assigned to the next non-named argument based on ordinal position
+
+Partial Arg Matching
+1.  Check for exact match on named args
+2.  Check for partial match
+3.  Check for positional match
+
+Lazy evaluation
+
+f <- function(a,b){
+a^2
+}
+f(2)
+^function never actually uses the arg of b, so no error
+
+If the second arg is used, it must be passed or assigned a default values
+
+
+The ... argument
+... - often used when extending another function and you don't want to copy the entire arg list of the original function
+
+myplot<- function(x,y, type="1", ...){
+plot(x,y, type=type, ...)
+}
+
+Generic function use:
+mean
+function(x,...)
+UseMethod("mean")
+
+... is necessary when the number of arguments passed to the function cannot be known in advanced
+ex: paste - concatination function
+> args(paste)
+function (..., sep = " ", collapse = NULL) 
+
+*If you use ..., you cannot use positional or partial matching.  
+*Must be named!
+
+paste("a", "b", se=":')
+^Will not assign se to "sep"
+
+
+*Scoping and Binding*
+if I call lm(), R will look for the function in the following order:
+1.  Search the global environment for a symbol name matching the one requested
+2.  Search the namespace of each of the packages on the search list
+
+> search()
+ [1] ".GlobalEnv"        "package:swirl"     "package:plyr"     
+ [4] "package:ggplot2"   "tools:rstudio"     "package:stats"    
+ [7] "package:graphics"  "package:grDevices" "package:utils"    
+[10] "package:datasets"  "package:methods"   "Autoloads"        
+[13] "package:base"    
+
+The order of the package on the searchlist matters!
+The most recently loaded package gets priority
+
+Scoping
+*main difference of R and S*
+The scoping rules determine how a value is associated with a free variable in a function
+R uses lexical scoping as opposed to dynamic scoping
+
+f <- function (x,y){
+x^2 + y / z
+}
+
+z is a free variable
+What value is assigned to z?
+
+Lexical scoping:  The values of free variables are searched for in the environment in which the function was defined
+
+an environment is collection of (symbol, value) pairs.  x is a symbol and 3.14 may be its value
+Every environment has a parent environment
+The only environment without a parent is the empty environment
+A function + an enironment = a closure or function closure
+
+If the value of a symbol is not found in the environment in which a function was defined, then the search is continued in the parent environment
+*continues until we hit the top-level environment, continues until we hit the empty environment
+
+Typically, a function is defined in the global environment, so the falues of free variables are just found in the user''s workspace
+This behavior is logical and is usually the "right thing" to don
+However, in R you can have funtions defined inside other functions
+->  you can't do this in C
+
+make.power <-function (n){
+pow<-function(x) {
+ x^n}
+pow
+}
+
+cube <- make.power(3)
+square <- make.power(2)
+
+cube(3)
+square(3)
+
+> ls(environment(cube))
+[1] "n"   "pow"
+> ls(environment(square))
+[1] "n"   "pow"
+
+Lexical vs. Dynamic Scoping
+> y <- 10
+> f <-function(x){
++   y <-2
++   y^2 + g(x)
++ }
+> g <- function(x) {x*y}
+> f(3)
+[1] 34
+
+Lexical Scoping - Value assigned in the defining environment
+Dynamic Scoping - Value assigned it the calling enviornment
+
+The exmaple below looks like dynamic scoping, but it is actually not!
+> g <- function(x) {x*y}
+> f(3)
+[1] 34
+> g <-function(x) {
++   a<-3
++   x+a+m
++ }
+> 
+> g(2)
+Error in g(2) : object 'm' not found
+> m<-10
+> 
+> g(2)
+[1] 15
+
+Other languages with lexical scoping LISP, Python
+
+Consequences of Lexical Scoping
+1.  All objects must be stored in memory
+2.  Functions must carry a pointer to their respective defining environments
+3.  In S-PLUS, free variables are always looked up in the global workspace, so everything can be stored on the disk becuase the "defining enironment" of all functions is the same
+
