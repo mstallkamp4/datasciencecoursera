@@ -102,6 +102,51 @@ x <- factor(c("yes", "yes", "no", "yes", "no"),
 x
 
 #Missing Values
+#na - Test if values are missing
+#NaN - test for missing numeric values
+
+x <- (c(1,2, NA, 10, 3))
+is.nan(x)
+is.na(x)
+
+#Data Frames 
+##used to store tabular data
+##every element of list has to have same length
+##Each Element can be thought of a calums and the lengh of each element of the list is the number of rows
+##Data frames can store different classes
+
+row.names()
+
+#cretaed by calling
+read.table() 
+read.csv()
+
+data.matrix()
+
+x <- data.frame(foo = 1:4, bar=c(T,T,F,T))
+x
+nrow(x)
+ncol(x)
+
+
+#Names
+#vectors
+x<-1:3 
+names(x)
+names(x) <- c("Mike", "IsThe", "Best")
+x
+
+#lists 
+x <-list(a=1, b=2, c=3)
+x
+
+#matrices
+x <-matrix (1:4, nrow=2, ncol=2)
+dimnames(x) <- list(c("Row1", "Row2"), c("Col1", "Col2"))
+x
+
+
+
 
 
 
