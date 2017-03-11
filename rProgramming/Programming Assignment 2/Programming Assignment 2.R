@@ -1,7 +1,7 @@
 #Programming Assignment 2
-##Create makeInverse that has the getters and setters for the matrix
+##Create makeCacheMatrix that has the getters and setters for the Matrix
 
-makeMatrix <- function(x = matrix()) {
+makeCacheMatrix  <- function(x = matrix()) {
     inv <- NULL
     set <- function(y) {
         x <<- y
@@ -17,7 +17,7 @@ makeMatrix <- function(x = matrix()) {
 
 ##Calculate the inverse of the matrix unless it is cached
 ##If it is cached, return the cached value
-cacheInverse <- function(x, ...) {
+cacheSolve <- function(x, ...) {
     inver <- x$getinv()
     if(!is.null(inver)) {
         print("getting cached data")
@@ -32,11 +32,19 @@ cacheInverse <- function(x, ...) {
 ##Create a matrix
 mat <- matrix(1:4,2)
 
-mat
-
-MadeMatrix <-makeMatrix(mat)
+MadeMatrix <-makeCacheMatrix(mat)
 ## Now I can use the $ notation to view matrix
 MadeMatrix$get()
-## Will return null as the cacheInverse has not yet been run
-cacheInverse(MadeMatrix)
-##Call it again and it will
+##Call cacheSolve to set the inverse in cache
+cacheSolve(MadeMatrix)
+##Call it again and see that it is pulling from cache
+cacheSolve(MadeMatrix)
+##Set the matrix stored in MadeMatrix to a new Values
+MadeMatrix$set(matrix(5:8,2))
+##Call it again to set cache
+cacheSolve(MadeMatrix)
+##Verify that cache is used
+cacheSolve(MadeMatrix)
+
+
+
