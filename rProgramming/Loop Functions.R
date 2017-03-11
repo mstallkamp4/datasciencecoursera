@@ -51,7 +51,7 @@ x <- matrix(rnorm(200),20,10)
 ##Matrix 20 rows 10 columns
 x
 function (x, margin, fun,...)
-apply(x,2,mean)
+    apply(x,2,mean)
 ##Takes the mean across all the second dimension -- In this case COlumsn
 #^preserve the columns collapse the rows
 
@@ -85,8 +85,8 @@ rowMeans(a, dims=2)
 ## - oor - use mapply
 
 function (FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE, USE.NAMES = TRUE) 
-
-str(mapply)
+    
+    str(mapply)
 
 list(rep(1,4), rep(2,3), rep(3,2), rep(4,1))
 #same as 

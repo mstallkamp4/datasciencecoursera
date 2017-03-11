@@ -40,6 +40,8 @@ lm(y -x)
 
 #recover
 options (error=recover)
+options (error=off)
+?options
 read.csv("nosuchfile")
 
 #menu is returned, but it is the function call stack
