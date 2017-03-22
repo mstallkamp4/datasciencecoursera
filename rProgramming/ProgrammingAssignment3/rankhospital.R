@@ -41,3 +41,10 @@ rankhospital <- function(state, outcome, num = "best") {
 }
 
 rankhospital("MD", "HeartAttack", "worst")
+rankhospital("NC", "HeartAttack", "worst")
+
+rankhospital("WA", "HeartAttack", 7)
+rankhospital("TX", "Pneumonia", 10)
+
+
+rankhospital("NY", "HeartAttack", 7)

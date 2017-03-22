@@ -33,3 +33,6 @@ best <- function(state, outcome) {
 
 }
 
+
+best("SC", "HeartAttack")
+best("AK", "Pneumonia")
