@@ -72,7 +72,7 @@ CombinedSet
 Outputfile <- CombinedSet %>% group_by(Activities,Subjects) %>% summarize_all(funs(mean))
 
 #Write the first file
-write.table(CombinedSet, "FirstTidySet.txt")
+write.table(CombinedSet, "FirstTidySet.txt", row.name=FALSE )
 
 #Write the second file
-write.table(Outputfile, "SecondTidySet.txt")
+write.table(Outputfile, "SecondTidySet.txt", row.name=FALSE )
