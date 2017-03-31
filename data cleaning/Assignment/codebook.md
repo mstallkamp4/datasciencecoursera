@@ -1,33 +1,33 @@
-
-#recipie.R
+ 
+# recipie.R
 This codebook explains the variables and methods used in the recipie.R script. 
 This project was completed to satisfy the peer reviewed assignment requirement for the data cleaning course on coursera.
 link: https://www.coursera.org/learn/data-cleaning/
 
-#variables
-[b]trainSubject[/b] - Contains the contents of the subject_training data file.  This holds subject data for the training set.
-[b]trainActivites[/b] - Contains the contents of the x_train data file.  This holds result data for the training set.
-[b]trainLabel[/b] - Contains the contents of the training label file  This holds label data for the training set.
+# variables
+trainSubject - Contains the contents of the subject_training data file.  This holds subject data for the training set.
+trainActivites - Contains the contents of the x_train data file.  This holds result data for the training set.
+trainLabel - Contains the contents of the training label file  This holds label data for the training set.
 
-[b]testSubject[/b] - Contains the contents of the subject_test data file.  This holds subject data for the test set.
-[b]testActivity[/b] - Contains the contents of the x_test data file.  This holds result data for the test set.
-[b]testlabel[/b] - Contains the contents of the y_test data file.  This holds label data for the test set
+testSubject - Contains the contents of the subject_test data file.  This holds subject data for the test set.
+testActivity - Contains the contents of the x_test data file.  This holds result data for the test set.
+testlabel - Contains the contents of the y_test data file.  This holds label data for the test set
 
-[b]activitylabels[/b] - This is the master list of activities.
-[b]features[/b] - This is the master list of features.
+activitylabels - This is the master list of activities.
+features - This is the master list of features.
 
-[b]Combined_Subject[/b] - The combined set of test and train subject data.
-[b]Combined_Activities[/b]- The combined set of test and train activity data.
-[b]Combined_Label[/b] - The combined set of test and train label data
+Combined_Subject - The combined set of test and train subject data.
+Combined_Activities - The combined set of test and train activity data.
+Combined_Label - The combined set of test and train label data
 
-[b]CombinedActivityLabels[/b] - A helper variable that merges the combined activities set with descriptive names.
-[b]meansandstdevs[/b] - A helper variable that extracts the columns that describe mean and standard deviations
+CombinedActivityLabels - A helper variable that merges the combined activities set with descriptive names.
+meansandstdevs - A helper variable that extracts the columns that describe mean and standard deviations
 
-[b]CombinedSet[/b] - The set of activity data for means and stand deviation measures.  This variable also includes subject and activity data. 
-[b]Outputfile[/b] - The combined set of mean values grouped by activities and subjects.  This variable is used to produce the second output file.
+CombinedSet - The set of activity data for means and stand deviation measures.  This variable also includes subject and activity data. 
+Outputfile - The combined set of mean values grouped by activities and subjects.  This variable is used to produce the second output file.
 
 
-#data transformation / processing
+# data transformation / processing
 1. 8 data sets are imported into R that will be needed to produce the final result.
 2. The data sets from 'train' and 'test' are merged to create combined sets for subjects, activities, and labels.
 3. Column Names are cleaned up for the combined sets as well as the activity and feature master tables.
