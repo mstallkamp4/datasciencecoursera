@@ -1,0 +1,25 @@
+Make plots only in the training set
+Look for
+- Imbalances in outcomes / predictors
+- Outliers or weird groups
+- Groups of points that not explained by a predictors
+- Skewed variables
+
+Feature creation
+Level 1 feature creation
+1.  SCIENCE (application specific knowledge) IS KEY-  Google "feature extraction for ....(voice / image, etc)"
+2.  Err on overcreation of features
+3.  In some applicaitons (images, voices) automate feature creation is necessary
+	->  Deep learning 
+	
+	Level 2 feature creation
+1.   The function preProcess in caret will handle some preprocessing
+2.  Create new covariates if you think they will improve fit
+3.  Use EDA on the training set
+4.  Be careful about overfitting!
+
+preprocessing with caret
+
+If you want to fit spline models use the gam method
+
+ 

@@ -1,0 +1,164 @@
+Process of building a machine learning solutions:
+Question
+Data
+Features (compressing the data in the right way)
+Algorithms
+
+Input data - Garbage in = Garbage Out
+1.  May be easy (movie ratings -> new movie ratings)
+2.  May be harder (gene expression -> disease)
+3.  Depends on what is a "good prediction"
+4.  Often more data > better models
+5.  The most important step!
+
+
+Features matter
+Good features
+->  Lead to data compression
+->  retain relevant information
+->  Are created based on expert application knowledge
+
+Common mistakes
+->  Trying to automate feature selection
+->  Not paying attention to data-specific quirks
+-> Throwing away information unnecessarily
+
+Algorithms matter less than you'd think
+
+The "best" machine learning method
+* INTERPRETABLE, simple, accurate, fast, scalable
+
+Prediction is about accuracy tradeoffs
+Accurracy vs. Interpertability, simplicity, speed, scalability
+
+ In sample vs out of sample
+ 
+ In sample error - The error rate you get on the same data set you used to build your predictor 
+ - sometimes called the resubstitution error
+ 
+ Out of Sample Error - Error rate you get on a new data set.  Generalization Error
+ 
+ 1.  Out of Sample error is what you care about
+ 2.  In sample error is always less then out of sample error
+ 3.  The reason is overfitting (matching your algorith to the data you have)
+ 
+ Data have two parts
+ 1. Signal - what we are looking for
+ 2.  Noise - Outliers
+ Goal of a predictor is to find signal
+ If you design a perfect in sample predictor, you capture signal + noise when you do that
+ 
+ prediction Study Design
+ 1.  Define your error rate
+ 2.  Split data into
+	->  Training, Testing, Validation (optional)
+3.  On the training set pick features
+	->  use cross-validation
+4.  On the training set pick predition funciton
+	->  use cross-validation
+5.  If no validation
+	->  Apply 1x to test set
+6.  If validation
+	->  Apply to test set and refine
+	->  Apply 1x to validation
+	
+Know the benchmarks
+
+Avoid small sample sizes
+
+Rules of thumb
+Large data set  
+60% training
+20% test
+20% validation
+
+Medium Data sizes
+60% Training 
+40% Testing
+
+If you have a small sample size
+* do cross validation
+* report against 
+
+Principals
+1.  Set the test/validation set aside and DONT LOOK AT IT
+2.  In general, randomly sample training and test
+3.  Your data sets must reflect structure of problem (time chunks)
+4.  Subsets should be 
+
+Types of Errors
+Key quantiles
+(example disease prediction)
+Sensitivity ->  Probability that the positive test and they have disease
+Specificity ->  Probability of negative test and no disease TP/(TP+FN)
+Positive Predictive Value ->  Probability if you have the disease, you got a positive test TN / (FP+TN)
+Negative Predictive Value -> Probability if you don't have the disease, you got a negative test TN /(FN+TN)
+Accuracy ->  Curent Outcome (TP+_TN)/(TP+FP+FN+TN)
+
+Common Error MEasures
+1.  Mean squared error (or root mean squared error)
+	- Continuous data, sensitive to outliers
+2.  Median absolute deviation
+	- Continuous data, often more robuse
+3.  Sensitivity
+	- If you want few missed positives
+4.  Specificity
+	- If you want few megatives called positive
+5.  Accuracy
+	- Weighs false positives / negatives equal
+6.  Concordance
+	- ex.  Kappa
+
+Receiver Operating Characteristics Curves
+* Predicting one of two categories 
+	- Alive/Dead
+	- Click on ad / don't click
+But your preditions are quntitative
+		- Probability of being alive
+		- Scale from 1 to 10
+
+	x=	1 - specificity
+	y = Sensitivity
+
+Area under the curve quantiifes how good the predition algorithm is 
+	AUC = .5 = Random Guessing
+	AUC = 1 = perfect classifier
+In general AUC of above .8 considered "good"
+
+CROSS Validation
+Problem
+1. Accuracy on the training set (resubstitution accuracy) is optimistic
+2.  A better estimate comes from an independent set (test set accuracy)
+3.  but we can't use the test set when building the model (becomes part of the training set)
+4.  We estimate the test set accuracy with the training set
+
+Approach
+1.  Use the training set
+2.  Split it into training / test sets
+3.  Build a model on the trainng set
+4.  Evaluate on the test set
+5.  Repeat and average the estimated errors
+
+Used for:
+1.  Picking variables to include in model
+2.  Picking the type of prediction function to use
+3.  Picking the parameters in the predition function
+4.  Preparing different predictors
+
+Approaches
+1.  Random Sampling
+2.  K-Fold (split into 3 sequentially)
+3.  Leave one out 
+	->  Leave out one example, predict it
+	->  Do that again for ALL samples
+	
+Considerations
+->  For time series data, must be used in "chunks"
+->  For k-fold cross validation
+	Larger k = less bias, more variance
+	Smaller k = more bias, less variance
+-> Random sampling must be done without replacement
+-> Random sampling with replacement is the bootstrap
+	- Underestimates the error (examples appear more than once in the error rate)
+	- Can be corrected, but is complicated (.632 Bootstrap)
+->  If you cross-validate to pick predictors, you must estimate errors on independent data	
